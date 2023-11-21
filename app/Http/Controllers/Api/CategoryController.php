@@ -36,9 +36,9 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)//si se pasa $id se utiliza la comentada
+    public function show($id)//si se pasa $id se utiliza la comentada
     {
-        $category = Category::included()->findOrFail($category);
+        $category = Category::included()->findOrFail($id);
         return $category;
     }
 

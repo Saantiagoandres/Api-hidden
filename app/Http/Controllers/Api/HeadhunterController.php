@@ -33,9 +33,9 @@ class HeadhunterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Headhunter $headhunter)
+    public function show($id)
     {
-        $headhunter = Headhunter::included()->findOrFail($headhunter->id);
+        $headhunter = Headhunter::included()->findOrFail($id);
         return $headhunter;
     }
 

@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\HeadhunterController;
 use App\Http\Controllers\Api\MultimediaController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommentaryController;
 
 
 /*
@@ -45,17 +47,17 @@ Route::get('candidates/{candidate}', [CandidateController::class,'show'])->name(
 Route::put('candidates/{candidate}', [CandidateController::class,'update'])->name('api.v1.candidates.update');
 Route::delete('candidates/{candidate}', [CandidateController::class,'destroy'])->name('api.v1.candidates.delete');
 
-Route::get('categories', [CategoryController::class,'index'])->name('api.v1.category.index');
-Route::post('categories', [CategoryController::class,'store'])->name('api.v1.category.store');
-Route::get('categories/{category}', [CategoryController::class,'show'])->name('api.v1.category.show');
-Route::put('categories/{category}', [CategoryController::class,'update'])->name('api.v1.category.update');
-Route::delete('categories/{category}', [CategoryController::class,'destroy'])->name('api.v1.category.delete');
+Route::get('categories', [CategoryController::class,'index'])->name('api.v1.categories.index');
+Route::post('categories', [CategoryController::class,'store'])->name('api.v1.categories.store');
+Route::get('categories/{category}', [CategoryController::class,'show'])->name('api.v1.categories.show');
+Route::put('categories/{category}', [CategoryController::class,'update'])->name('api.v1.categories.update');
+Route::delete('categories/{category}', [CategoryController::class,'destroy'])->name('api.v1.categories.delete');
 
 Route::get('commentaries', [CommentaryController::class,'index'])->name('api.v1.commentaries.index');
-Route::post('commentaries', [CommentaryController::class,'store'])->name('api.v1.commentariesc.store');
+Route::post('commentaries', [CommentaryController::class,'store'])->name('api.v1.commentaries.store');
 Route::get('commentaries/{commentary}', [CommentaryController::class,'show'])->name('api.v1.commentaries.show');
 Route::put('commentaries/{commentary}', [CommentaryController::class,'update'])->name('api.v1.commentaries.update');
-Route::delete('commentaries/{commentary}', [CommentatyController::class,'destroy'])->name('api.v1.commentariesdelete');
+Route::delete('commentaries/{commentary}', [CommentatyController::class,'destroy'])->name('api.v1.commentaries.delete');
 
 
 Route::get('headhunters', [HeadhunterController::class,'index'])->name('api.v1.headhunters.index');

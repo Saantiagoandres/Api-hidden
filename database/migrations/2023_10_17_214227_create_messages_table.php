@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Contenido_mensaje');
             $table->dateTime('Fecha_hora_mensaje');
+            
             // $table->string('slug')->unique();
             $table->timestamps();
 
