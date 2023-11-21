@@ -36,9 +36,9 @@ class CommentaryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Commentary $commentary)
+    public function show($id)
     {
-        $commentary = Commentary::included()->findOrFail($commentary);
+        $commentary = Commentary::included()->findOrFail($id);
         return $commentary;
     }
 

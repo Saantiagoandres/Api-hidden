@@ -43,9 +43,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        $user = User::included()->findOrFail($user);
+        $user = User::included()->findOrFail($id);
         return $user;
     }
 

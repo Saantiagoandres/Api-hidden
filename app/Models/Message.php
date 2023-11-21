@@ -4,44 +4,44 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Commentary;
-use App\Models\Message;
+use App\Models\Candidate;
+use App\Models\Headhunter;
 
 
-class headhunter extends Model
+class Message extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['descripcion','candidate_id'];
+    protected $fillable = ['Contenido_mensaje','Fecha_hora_mensaje'];//Campos que se van a asignacion masiva:
+    protected $allowIncluded=['headhunter','candidate', ];//las posibles Querys que se pueden realizar
+    protected $allowFilter=['Contenido_mensaje','Fecha_hora_mensaje'];
+    protected $allowSort=['Contenido_mensaje','Fecha_hora_mensaje'];
 
-    protected $allowIncluded = ['comentaries','messages','comentaries.multimedia','user.roles' ];
-
-    protected $allowFilter = ['descripcion','candidate_id'];
-    
-    protected $AllowSort = ['descripcion','candidate_id'];
-    
 
  /////////////////////////////////////////////////////////////////////////////
     public function scopeIncluded(Builder $query){
-       
+
         // if(empty($this->allowIncluded)||empty(request('included'))){
         //     return;
         // }
-        
+
         $relations = explode(',', request('included'));//['posts','relation2']
-       
+
         $allowIncluded=collect($this->allowIncluded);//colocamos en una colecion lo que tiene $allowIncluded en este caso = ['posts','posts.user']
-    
+
         foreach($relations as $key => $relationship){//recorremos el array de relaciones
-            
+
             if(!$allowIncluded->contains($relationship)){
                 unset($relations[$key]);
             }
-        
+
         }
       $query->with($relations);//se ejecuta el query con lo que tiene $relations en ultimas es el valor en la url de included
-     
+
     }
 
 //return $relations;
@@ -51,11 +51,11 @@ class headhunter extends Model
 
 public function scopeFilter(Builder $query){
 
-    
+
     if(empty($this->allowFilter)||empty(request('filter'))){
         return;
     }
-    
+
     $filters =request('filter');
     $allowFilter= collect($this->allowFilter);
 
@@ -65,7 +65,7 @@ public function scopeFilter(Builder $query){
 
             $query->where($filter,'LIKE', '%'.$value.'%');
 
-     
+
         }
 
     }
@@ -77,12 +77,12 @@ public function scopeFilter(Builder $query){
 
 public function scopeSort(Builder $query){
 
-    
+
     if(empty($this->allowSort)||empty(request('sort'))){
         return;
     }
-    
-    
+
+
     $sortFields = explode(',', request('sort'));
     $allowSort= collect($this->allowSort);
 
@@ -91,32 +91,23 @@ public function scopeSort(Builder $query){
          if($allowSort->contains($sortField)){
 
             $query->orderBy($sortField,'asc');
-     
+
         }
 
     }
 
      //http://api.codersfree1.test/v1/categories?sort=name
-    
+
 
     }
 
 
-    
-    public function comentaries(){
-        return $this->hasMany(Commentary::class);
+
+    public function headhunter(){
+        return $this->belongsTo('App\Models\Headhunter');
     }
 
-    public function messages(){
-        return $this->hasMany(Message::class);
+    public function candidate(){
+        return $this->belongsTo('App\Models\Candidate');
     }
-    public function user(){
-        return $this->belongsTo(User::class,'user_id');
-    }
-
-
 }
-
-   
-
-  

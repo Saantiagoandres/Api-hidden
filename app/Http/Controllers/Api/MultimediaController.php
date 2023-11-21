@@ -39,9 +39,9 @@ class MultimediaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Multimedia $multimedia)
+    public function show($id)
     {
-        $multimedia = Multimedia::included()->findOrFail($multimedia);
+        $multimedia = Multimedia::included()->findOrFail($id);
         return $multimedia;
     }
 

@@ -34,9 +34,9 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    public function show($id)
     {
-        $role = Role::included()->findOrFail($role);
+        $role = Role::included()->findOrFail($id);
         return $role;
     }
 

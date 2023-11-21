@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\candidate;
-use Illuminate\Database\Eloquent\headhunter;
+use App\Models\Commentary;
+use App\Models\Message;
 
 
-class Category extends Model
+class headhunter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Contenido_mensaje','Fecha_hora_mensaje'];//Campos que se van a asignacion masiva:
-    protected $allowIncluded=['headhunter','candidate', ];//las posibles Querys que se pueden realizar
-    protected $allowFilter=['Contenido_mensaje','Fecha_hora_mensaje'];
-    protected $allowSort=['Contenido_mensaje','Fecha_hora_mensaje'];
+    protected $fillable = ['descripcion','candidate_id'];
 
+    protected $allowIncluded = ['comentaries','messages','comentaries.multimedia','user.roles' ];
+
+    protected $allowFilter = ['descripcion','candidate_id'];
+    
+    protected $AllowSort = ['descripcion','candidate_id'];
+    
 
  /////////////////////////////////////////////////////////////////////////////
     public function scopeIncluded(Builder $query){
@@ -100,11 +103,20 @@ public function scopeSort(Builder $query){
 
 
     
-    public function headhunter(){
-        return $this->belongsTo(Headhunter::class);
+    public function comentaries(){
+        return $this->hasMany('App\Models\Commentary');
     }
 
-    public function candidate(){
-        return $this->belongsTo(Candidate::class);
+    public function messages(){
+        return $this->hasMany('App\Models\Commentary');
     }
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+
+
 }
+
+   
+
+  

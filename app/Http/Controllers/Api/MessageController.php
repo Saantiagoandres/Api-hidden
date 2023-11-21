@@ -41,9 +41,9 @@ class MessageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Message $message)
+    public function show($id)
     {
-        $message = Message::included()->findOrFail($message);
+        $message = Message::included()->findOrFail($id);
         return $message;
     }
 

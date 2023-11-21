@@ -23,7 +23,7 @@ class MessageFactory extends Factory
             'fecha_hora_mensaje'=>$this->faker->date(),
 
             'candidate_id'=>Candidate::inRandomOrder()->first(),
-            'headhunter_id'=>Headhunter::inRandomOrder()->first(),
+            'headhunter_id'=>Headhunter::inRandomOrder()->first()
         ];
     }
 }

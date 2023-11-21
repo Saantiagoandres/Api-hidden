@@ -34,9 +34,9 @@ class CandidateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Candidate $candidate)
+    public function show($id)
     {
-        $candidate = Candidate::included()->findOrFail($candidate);
+        $candidate = Candidate::included()->findOrFail($id);
         return $candidate;
     }
 
